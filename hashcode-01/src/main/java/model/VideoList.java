@@ -6,9 +6,15 @@ import java.util.List;
 public class VideoList {
     
     private List<Video> videos = new ArrayList<>();
+    private int totalSize = 0;
     
     public void addVideo(Video video){
-        this.videos.add(video);
+        if (videos.contains(video)){
+        	return;
+        }
+    	
+    	this.videos.add(video);
+        this.totalSize = totalSize + video.getSize();
     }
 
 
@@ -22,4 +28,9 @@ public class VideoList {
                 "videos=" + videos +
                 '}';
     }
+    public int getTotalSize() {
+		return totalSize;
+	}
+    
 }
+

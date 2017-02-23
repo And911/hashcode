@@ -38,8 +38,9 @@ public class Reader {
 
         HashMap<Integer, CacheServer> cacheServerMap = new HashMap<>();
         for (int i = 0; i < criteria.getCaches(); i++) {
-            CacheServer cacheServer = new CacheServer(i);
+            CacheServer cacheServer = new CacheServer(i, criteria.getCapacity());
             cacheServerMap.put(i, cacheServer);
+            dataCenter.addCacheServer(cacheServer);
         }
 
         for (CacheServer cacheServer : cacheServerMap.values()) {
