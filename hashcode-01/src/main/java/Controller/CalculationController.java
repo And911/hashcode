@@ -2,9 +2,7 @@ package Controller;
 
 import model.*;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by kescha on 23.02.2017.
@@ -12,6 +10,7 @@ import java.util.List;
 public class CalculationController {
 
     public void calculate(DataCenter dataCenter) {
+        Set<Integer> usedVideos = new HashSet<>();
         List<Endpoint> endpoints = dataCenter.getEndpoints();
         for (Endpoint endpoint : endpoints) {
             List<VideoRequest> videoRequests = endpoint.getVideoRequests();
@@ -22,10 +21,14 @@ public class CalculationController {
 
             for (VideoRequest videoRequest : videoRequests) {
                 Video video = videoRequest.getVideo();
+                if (usedVideos.contains(video.getId())) {
+                    continue;
+                }
 
                 CacheServer cacheServer = findCacheServer(video.getSize(), endpoint, dataCenter.getCriteria());
                 if (cacheServer != null) {
                     cacheServer.cacheVideo(video);
+                    usedVideos.add(video.getId());
                 }
             }
         }
