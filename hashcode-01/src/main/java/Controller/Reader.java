@@ -1,3 +1,5 @@
+package Controller;
+
 import model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,15 +20,12 @@ public class Reader {
         List<String> lines = Files.readAllLines(Paths.get(ClassLoader.getSystemResource(filename).toURI()));
 
         final String criteriaString = lines.get(0);
-        logger.info("Split: {}", criteriaString);
         String[] split = criteriaString.split(" ");
-        logger.info("Split: {}", split[1]);
 
         Criteria criteria = new Criteria(Integer.valueOf(split[0]), Integer.valueOf(split[1]), Integer.valueOf(split[2]), Integer.valueOf(split[3]), Integer.valueOf(split[4]));
 
         DataCenter dataCenter = new DataCenter(criteria);
 
-        logger.info("Criteria: {}", criteria);
         final String filesString = lines.get(1);
         String[] files = filesString.split(SEPARATOR);
 
@@ -62,7 +61,6 @@ public class Reader {
 
             dataCenter.addEndpoint(endpoint);
             endpointMap.put(endpointId, endpoint);
-            logger.info("CacheServerConnection: {}", endpoint);
         }
 
         for (int i = 0; i < criteria.getRequestsDescriptions(); i++) {
@@ -74,9 +72,6 @@ public class Reader {
 
             endpointMap.get(endpointId).addVideoRequest(new VideoRequest(videoMap.get(videoId), requestAmount));
         }
-
-        logger.info("Endpint: {}", dataCenter);
-
 
         return dataCenter;
     }

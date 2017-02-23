@@ -1,8 +1,5 @@
+import Controller.Reader;
 import org.junit.Test;
-
-import java.net.URL;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by kescha on 23.02.2017.
