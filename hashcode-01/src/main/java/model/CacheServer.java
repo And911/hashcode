@@ -16,5 +16,12 @@ public class CacheServer {
     public VideoList getCachedVideos() {
 		return cachedVideos;
 	}
-    
+
+    @Override
+    public String toString() {
+        return "CacheServer{" +
+                "cachedVideos=" + cachedVideos +
+                ", id=" + id +
+                '}';
+    }
 }
