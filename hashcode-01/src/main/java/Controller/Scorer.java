@@ -33,7 +33,7 @@ public class Scorer {
                 i++;
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
         } finally {
             if (out != null) {
                 out.flush();

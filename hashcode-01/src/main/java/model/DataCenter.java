@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class DataCenter {
     
@@ -52,4 +53,13 @@ public class DataCenter {
                 ", criteria=" + criteria +
                 '}';
     }
+
+	public CacheServer getCacheServerById(int cacheServerId) {
+		for (CacheServer cs : this.cacheServers){
+			if (cs.getId() == cacheServerId){
+				return cs;
+			}
+		}
+		throw new NoSuchElementException(new Integer(cacheServerId).toString());
+	}
 }
