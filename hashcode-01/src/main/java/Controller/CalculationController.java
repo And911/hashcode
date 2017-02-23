@@ -14,10 +14,10 @@ public class CalculationController {
         List<Endpoint> endpoints = dataCenter.getEndpoints();
         for (Endpoint endpoint : endpoints) {
             List<VideoRequest> videoRequests = endpoint.getVideoRequests();
-            Collections.sort(videoRequests, Comparator.comparingInt(VideoRequest::getNumberOfRequests));
+            Collections.sort(videoRequests, (o1, o2) -> o2.getNumberOfRequests() - o1.getNumberOfRequests());
 
             List<CacheServerConnection> cacheServerConnections = endpoint.getCacheServerConnections();
-            Collections.sort(cacheServerConnections, (o1, o2) -> o2.getLatency() - o1.getLatency());
+            Collections.sort(cacheServerConnections, Comparator.comparingInt(CacheServerConnection::getLatency));
 
             for (VideoRequest videoRequest : videoRequests) {
                 Video video = videoRequest.getVideo();
