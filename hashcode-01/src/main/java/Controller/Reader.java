@@ -42,6 +42,10 @@ public class Reader {
             cacheServerMap.put(i, cacheServer);
         }
 
+        for (CacheServer cacheServer : cacheServerMap.values()) {
+            dataCenter.addCacheServer(cacheServer);
+        }
+
         HashMap<Integer, Endpoint> endpointMap = new HashMap<>();
         int lineMarker = 2;
         for (int endpointId = 0; endpointId < criteria.getEndpoints(); endpointId++) {

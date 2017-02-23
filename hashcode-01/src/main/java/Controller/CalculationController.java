@@ -40,9 +40,9 @@ public class CalculationController {
             List<Video> videos = cachedVideos.getVideos();
             int sum = 0;
             for (Video video : videos) {
-                sum = video.getSize();
+                sum += video.getSize();
             }
-            if (criteria.getCapacity() < sum + size) {
+            if (criteria.getCapacity() > sum + size) {
                 return cacheServer;
             }
         }
