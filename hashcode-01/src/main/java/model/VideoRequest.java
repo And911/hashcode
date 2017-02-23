@@ -9,8 +9,21 @@ public class VideoRequest {
         this.video = video;
         this.numberOfRequests = numberOfRequests;
     }
-    
+
+
+    public int getNumberOfRequests() {
+        return numberOfRequests;
+    }
+
     public Video getVideo(){
         return this.video;
+    }
+
+    @Override
+    public String toString() {
+        return "VideoRequest{" +
+                "video=" + video +
+                ", numberOfRequests=" + numberOfRequests +
+                '}';
     }
 }

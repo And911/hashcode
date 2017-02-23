@@ -30,23 +30,26 @@ public class Reader {
         final String filesString = lines.get(1);
         String[] files = filesString.split(SEPARATOR);
 
+        HashMap<Integer, Video> videoMap = new HashMap<>();
         for (int i = 0; i < files.length; i++) {
             Video video = new Video(i, Integer.valueOf(files[i]));
             dataCenter.addVideo(video);
+            videoMap.put(i, video);
         }
-        // FIXME create file structure
+
         HashMap<Integer, CacheServer> cacheServerMap = new HashMap<>();
         for (int i = 0; i < criteria.getCaches(); i++) {
             CacheServer cacheServer = new CacheServer(i);
             cacheServerMap.put(i, cacheServer);
         }
 
+        HashMap<Integer, Endpoint> endpointMap = new HashMap<>();
         int lineMarker = 2;
-        for (int i = 0; i < criteria.getEndpoints(); i++) {
+        for (int endpointId = 0; endpointId < criteria.getEndpoints(); endpointId++) {
             final String endpointString = lines.get(lineMarker++);
             String[] endpointValues = endpointString.split(SEPARATOR);
 
-            Endpoint endpoint = new Endpoint(i, Integer.valueOf(endpointValues[0]));
+            Endpoint endpoint = new Endpoint(endpointId, Integer.valueOf(endpointValues[0]));
             int cacheServerAmount = Integer.valueOf(endpointValues[1]);
             for (int j = 0; j < cacheServerAmount; j++) {
                 String serverConnectionString = lines.get(lineMarker++);
@@ -58,8 +61,23 @@ public class Reader {
             }
 
             dataCenter.addEndpoint(endpoint);
+            endpointMap.put(endpointId, endpoint);
             logger.info("CacheServerConnection: {}", endpoint);
         }
+
+        for (int i = 0; i < criteria.getRequestsDescriptions(); i++) {
+            String requestDescriptionString = lines.get(lineMarker++);
+            String[] requestDescriptionValue = requestDescriptionString.split(SEPARATOR);
+            Integer videoId = Integer.valueOf(requestDescriptionValue[0]);
+            Integer endpointId = Integer.valueOf(requestDescriptionValue[1]);
+            Integer requestAmount = Integer.valueOf(requestDescriptionValue[2]);
+
+            endpointMap.get(endpointId).addVideoRequest(new VideoRequest(videoMap.get(videoId), requestAmount));
+        }
+
+        logger.info("Endpint: {}", dataCenter);
+
+
         return dataCenter;
     }
 }

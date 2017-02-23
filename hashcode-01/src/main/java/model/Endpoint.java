@@ -24,6 +24,22 @@ public class Endpoint {
     }
 
 
+    public int getId() {
+        return id;
+    }
+
+    public int getLatency() {
+        return latency;
+    }
+
+    public List<CacheServerConnection> getCacheServerConnections() {
+        return cacheServerConnections;
+    }
+
+    public List<VideoRequest> getVideoRequests() {
+        return videoRequests;
+    }
+
     @Override
     public String toString() {
         return "Endpoint{" +

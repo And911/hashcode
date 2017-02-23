@@ -42,4 +42,14 @@ public class DataCenter {
     public List<CacheServer> getCacheServers() {
         return cacheServers;
     }
+
+    @Override
+    public String toString() {
+        return "DataCenter{" +
+                "videoList=" + videoList +
+                ", endpoints=" + endpoints +
+                ", cacheServers=" + cacheServers +
+                ", criteria=" + criteria +
+                '}';
+    }
 }
