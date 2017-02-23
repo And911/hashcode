@@ -10,9 +10,5 @@ public class VideoList {
     public void addVideo(Video video){
         this.videos.add(video);
     }
-
-
-    public List<Video> getVideos() {
-        return videos;
-    }
+    
 }

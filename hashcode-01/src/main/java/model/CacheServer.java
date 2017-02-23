@@ -13,4 +13,8 @@ public class CacheServer {
         this.cachedVideos.addVideo(video);
     }
     
+    public VideoList getCachedVideos() {
+		return cachedVideos;
+	}
+    
 }
