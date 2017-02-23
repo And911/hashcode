@@ -22,6 +22,15 @@ public class Endpoint {
     public void addVideoRequest(VideoRequest request){
         this.videoRequests.add(request);
     }
-    
-    
+
+
+    @Override
+    public String toString() {
+        return "Endpoint{" +
+                "id=" + id +
+                ", latency=" + latency +
+                ", cacheServerConnections=" + cacheServerConnections +
+                ", videoRequests=" + videoRequests +
+                '}';
+    }
 }
