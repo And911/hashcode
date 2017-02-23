@@ -11,4 +11,8 @@ public class VideoList {
         this.videos.add(video);
     }
     
+    public List<Video> getVideos() {
+		return videos;
+	}
+    
 }
